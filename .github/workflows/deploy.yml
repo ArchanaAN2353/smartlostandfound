@@ -3,7 +3,7 @@ name: Deploy Smart Lost & Found
 on:
   push:
     branches:
-      - main
+      [ "main", "leaderboardfeature" ] 
   workflow_dispatch:
 
 permissions:

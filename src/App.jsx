@@ -15,6 +15,7 @@ import MysteryMatch from "./pages/MysteryMatch";
 import CommunitySearch from "./pages/CommunitySearch";
 import ContactAgent from "./pages/ContactAgent";
 import Chat from "./pages/Chat";
+import { Leaderboard } from './pages/Leaderboard';
 
 // ======================================================
 // AUTH CHECK
@@ -192,6 +193,17 @@ function App() {
             </ProtectedRoute>
           }
         />
+        {/* =========================================================================
+         LEADERBOARD 
+        ========================================================================= */}
+        <Route 
+         path="/leaderboard"
+         element={
+         <ProtectedRoute>
+         <Leaderboard />
+         </ProtectedRoute>
+         }
+       />
 
         {/* ==============================================
             COMMUNITY
@@ -205,6 +217,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
 
         {/* ==============================================
             CONTACT AGENT
