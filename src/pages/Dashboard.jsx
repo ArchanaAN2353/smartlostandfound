@@ -622,6 +622,71 @@ function Dashboard() {
                   <Sparkles size={18} />
                   SmartMatch
                 </Link>
+              {/* <Link
+              to="/leaderboard"
+              className="secondary-button"
+              style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+              }}>
+              <svg xmlns="http://w3.org" 
+              width="18" height="18" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor"
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+              <path d="M4 22h16" />
+              <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34" />
+              <path d="M12 2a6 6 0 0 1 6 6v5a6 6 0 0 1-6 6 6 6 6 0 0 1-6-6V8a6 6 0 0 1 6-6z" />
+              </svg>
+              Leaderboard
+              </Link> */}
+                {/* =========================================================================
+    STANDALONE LEADERBOARD BOARD BLOCK (Pasted at the bottom of Dashboard.jsx)
+========================================================================= */}
+<div
+  className="step-card"
+  style={{ 
+    marginBottom: "25px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "20px"
+  }}
+>
+  <div>
+    <h3 style={{ margin: "0 0 5px 0" }}>🏆 Top Founders Leaderboard</h3>
+    <p style={{ margin: 0, fontSize: "14px", color: "#5C4D3E" }}>
+      See the rankings of campus heroes who have returned the most lost items.
+    </p>
+  </div>
+
+  <Link
+    to="/leaderboard"
+    className="primary-button"
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "8px",
+      whiteSpace: "nowrap"
+    }}
+  >
+    <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+      <path d="M4 22h16" />
+      <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34" />
+      <path d="M12 2a6 6 0 0 1 6 6v5a6 6 0 0 1-6 6 6 6 6 0 0 1-6-6V8a6 6 0 0 1 6-6z" />
+    </svg>
+    View Rankings
+  </Link>
+</div>
+
 
               </div>
 

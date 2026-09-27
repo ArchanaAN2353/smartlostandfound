@@ -1,14 +1,14 @@
 import { supabase } from './supabase';
 
 /**
- * Fetches raw data from the 'lost_items' table.
+ * Fetches data from the 'lost_items' table and aggregates metrics per user.
  */
 export const getLeaderboardData = async () => {
   try {
-    // 1. Fetch only the user_id column from lost_items to prevent table join crashes
+    // 1. Query the exact table and column found in your Dashboard.jsx file
     const { data: items, error } = await supabase
       .from('lost_items') 
-      .select('user_id');
+      .select('user_id'); // Using user_id based on your dashboard query snippet
 
     if (error) {
       console.error('Supabase query error:', error.message);
@@ -19,14 +19,19 @@ export const getLeaderboardData = async () => {
       return [];
     }
 
-    // 2. Count the total items reported per unique identifier string
+    // 2. Group items by user_id and count how many entries they have
     const userCounts = items.reduce((accumulator, item) => {
       const id = item.user_id;
+      
+      // Default fallback name for prototype view
+      const name = id ? `User ${id.substring(0, 5)}...` : 'Anonymous';
+
       if (!id) return accumulator;
 
       if (!accumulator[id]) {
         accumulator[id] = {
           id: id,
+          name: name,
           itemsFound: 0,
         };
       }
@@ -35,10 +40,10 @@ export const getLeaderboardData = async () => {
       return accumulator;
     }, {});
 
-    // 3. Convert grouped objects to array and sort descending (highest first)
+    // 3. Convert grouped objects to array and sort by highest items found descending
     return Object.values(userCounts).sort((a, b) => b.itemsFound - a.itemsFound);
   } catch (err) {
     console.error('Unexpected error fetching leaderboard:', err);
     return [];
   }
-};
+}
