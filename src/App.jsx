@@ -15,7 +15,7 @@ import MysteryMatch from "./pages/MysteryMatch";
 import CommunitySearch from "./pages/CommunitySearch";
 import ContactAgent from "./pages/ContactAgent";
 import Chat from "./pages/Chat";
-import { Leaderboard } from './pages/Leaderboard';
+import { Leaderboard } from './pages/leaderboard';
 
 // ======================================================
 // AUTH CHECK
