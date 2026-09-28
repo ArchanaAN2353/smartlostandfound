@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -14,6 +15,7 @@ import {
   User,
   Mail,
   LogOut,
+  Map,
 } from "lucide-react";
 
 import { supabase } from "../services/supabase";
@@ -23,10 +25,8 @@ function Dashboard() {
 
   const [lostItems, setLostItems] = useState([]);
   const [foundItems, setFoundItems] = useState([]);
-
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(null);
-
   const [user, setUser] = useState(null);
   const [loggingOut, setLoggingOut] = useState(false);
 
@@ -351,7 +351,6 @@ function Dashboard() {
         </Link>
 
         <div className="form-header">
-
           <div className="form-icon">
             <Sparkles size={26} />
           </div>
@@ -366,8 +365,11 @@ function Dashboard() {
             Monitor your lost items, found items and
             SmartMatch activity in one place.
           </p>
-
         </div>
+
+        {/* ==================================================
+            USER INFORMATION
+        ================================================== */}
 
         <div
           className="step-card"
@@ -380,7 +382,6 @@ function Dashboard() {
             flexWrap: "wrap",
           }}
         >
-
           <div
             style={{
               display: "flex",
@@ -388,7 +389,6 @@ function Dashboard() {
               gap: "14px",
             }}
           >
-
             <div
               style={{
                 width: "48px",
@@ -405,7 +405,6 @@ function Dashboard() {
             </div>
 
             <div>
-
               <p
                 className="eyebrow"
                 style={{ marginBottom: "4px" }}
@@ -429,9 +428,7 @@ function Dashboard() {
                 <Mail size={14} />
                 {user?.email || "Loading email..."}
               </p>
-
             </div>
-
           </div>
 
           <button
@@ -446,13 +443,14 @@ function Dashboard() {
               ? "Signing out..."
               : "Logout"}
           </button>
-
         </div>
 
+        {/* ==================================================
+            LOADING
+        ================================================== */}
+
         {loading ? (
-
           <div className="step-card">
-
             <Sparkles size={30} />
 
             <h3>
@@ -462,20 +460,18 @@ function Dashboard() {
             <p>
               Getting your personal reports.
             </p>
-
           </div>
-
         ) : (
-
           <>
+            {/* ==================================================
+                STATISTICS
+            ================================================== */}
 
             <div
               className="steps"
               style={{ marginBottom: "25px" }}
             >
-
               <div className="step-card">
-
                 <Search size={25} />
 
                 <h3>
@@ -485,11 +481,9 @@ function Dashboard() {
                 <p>
                   My Lost Reports
                 </p>
-
               </div>
 
               <div className="step-card">
-
                 <Package size={25} />
 
                 <h3>
@@ -499,11 +493,9 @@ function Dashboard() {
                 <p>
                   My Found Reports
                 </p>
-
               </div>
 
               <div className="step-card">
-
                 <Sparkles size={25} />
 
                 <h3>
@@ -513,11 +505,9 @@ function Dashboard() {
                 <p>
                   Possible Comparisons
                 </p>
-
               </div>
 
               <div className="step-card">
-
                 <CheckCircle2 size={25} />
 
                 <h3>
@@ -527,18 +517,18 @@ function Dashboard() {
                 <p>
                   Verified Claims
                 </p>
-
               </div>
-
             </div>
+
+            {/* ==================================================
+                SECONDARY STATISTICS
+            ================================================== */}
 
             <div
               className="steps"
               style={{ marginBottom: "25px" }}
             >
-
               <div className="step-card">
-
                 <Clock3 size={24} />
 
                 <h3>
@@ -548,11 +538,9 @@ function Dashboard() {
                 <p>
                   Pending Claims
                 </p>
-
               </div>
 
               <div className="step-card">
-
                 <ShieldCheck size={24} />
 
                 <h3>
@@ -562,11 +550,9 @@ function Dashboard() {
                 <p>
                   Active Verified Claims
                 </p>
-
               </div>
 
               <div className="step-card">
-
                 <RotateCcw size={24} />
 
                 <h3>
@@ -576,16 +562,17 @@ function Dashboard() {
                 <p>
                   Returned Items
                 </p>
-
               </div>
-
             </div>
+
+            {/* ==================================================
+                QUICK ACTIONS
+            ================================================== */}
 
             <div
               className="step-card"
               style={{ marginBottom: "25px" }}
             >
-
               <h3>
                 Quick Actions
               </h3>
@@ -598,7 +585,6 @@ function Dashboard() {
                   marginTop: "15px",
                 }}
               >
-
                 <Link
                   to="/report-lost"
                   className="primary-button"
@@ -623,21 +609,93 @@ function Dashboard() {
                   SmartMatch
                 </Link>
 
+                {/* CAMPUS HEATMAP BUTTON */}
+                <Link
+                  to="/heatmap"
+                  className="secondary-button"
+                >
+                  <Map size={18} />
+                  Campus Heatmap
+                </Link>
+              </div>
+            </div>
+
+            {/* ==================================================
+                LEADERBOARD
+            ================================================== */}
+
+            <div
+              className="step-card"
+              style={{
+                marginBottom: "25px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "20px",
+              }}
+            >
+              <div>
+                <h3 style={{ margin: "0 0 5px 0" }}>
+                  🏆 Top Founders Leaderboard
+                </h3>
+
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: "14px",
+                    color: "#5C4D3E",
+                  }}
+                >
+                  See the rankings of campus heroes who
+                  have returned the most lost items.
+                </p>
               </div>
 
+              <Link
+                to="/leaderboard"
+                className="primary-button"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <svg
+                  xmlns="http://w3.org"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                  <path d="M4 22h16" />
+                  <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34" />
+                  <path d="M12 2a6 6 0 0 1 6 6v5a6 6 0 0 1-6 6 6 6 0 0 1-6-6V8a6 6 0 0 1 6-6z" />
+                </svg>
+
+                View Rankings
+              </Link>
             </div>
+
+            {/* ==================================================
+                RECENT LOST REPORTS
+            ================================================== */}
 
             <div
               className="step-card"
               style={{ marginBottom: "25px" }}
             >
-
               <h3>
                 My Recent Lost Reports
               </h3>
 
               {lostItems.length === 0 ? (
-
                 <div
                   style={{
                     padding: "20px 0",
@@ -658,13 +716,10 @@ function Dashboard() {
                     Report Lost Item
                   </Link>
                 </div>
-
               ) : (
-
                 lostItems
                   .slice(0, 5)
                   .map((item) => (
-
                     <div
                       key={item.id}
                       style={{
@@ -673,7 +728,6 @@ function Dashboard() {
                           "1px solid rgba(255,255,255,0.08)",
                       }}
                     >
-
                       <div
                         style={{
                           display: "flex",
@@ -682,15 +736,14 @@ function Dashboard() {
                           flexWrap: "wrap",
                         }}
                       >
-
                         <div>
-
                           <strong>
                             {item.item_name}
                           </strong>
 
                           <p>
-                            {item.location || "Location not specified"}
+                            {item.location ||
+                              "Location not specified"}
                           </p>
 
                           {item.lost_date && (
@@ -698,7 +751,6 @@ function Dashboard() {
                               Lost on {item.lost_date}
                             </small>
                           )}
-
                         </div>
 
                         <span
@@ -712,35 +764,31 @@ function Dashboard() {
                         >
                           {item.status || "lost"}
                         </span>
-
                       </div>
-
                     </div>
-
                   ))
-
               )}
-
             </div>
+
+            {/* ==================================================
+                RECENT FOUND REPORTS
+            ================================================== */}
 
             <div
               className="step-card"
               style={{ marginBottom: "25px" }}
             >
-
               <h3>
                 My Recent Found Reports
               </h3>
 
               {foundItems.length === 0 ? (
-
                 <div
                   style={{
                     padding: "20px 0",
                     opacity: 0.7,
                   }}
                 >
-
                   <Package size={24} />
 
                   <p>
@@ -754,15 +802,11 @@ function Dashboard() {
                   >
                     Report Found Item
                   </Link>
-
                 </div>
-
               ) : (
-
                 foundItems
                   .slice(0, 5)
                   .map((item) => (
-
                     <div
                       key={item.id}
                       style={{
@@ -771,7 +815,6 @@ function Dashboard() {
                           "1px solid rgba(255,255,255,0.08)",
                       }}
                     >
-
                       <div
                         style={{
                           display: "flex",
@@ -780,15 +823,14 @@ function Dashboard() {
                           flexWrap: "wrap",
                         }}
                       >
-
                         <div>
-
                           <strong>
                             {item.item_name}
                           </strong>
 
                           <p>
-                            {item.location || "Location not specified"}
+                            {item.location ||
+                              "Location not specified"}
                           </p>
 
                           {item.found_date && (
@@ -796,7 +838,6 @@ function Dashboard() {
                               Found on {item.found_date}
                             </small>
                           )}
-
                         </div>
 
                         <span
@@ -810,12 +851,12 @@ function Dashboard() {
                         >
                           {item.status || "found"}
                         </span>
-
                       </div>
+
+                      {/* PENDING CLAIM */}
 
                       {item.claim_status === "pending" &&
                         item.returned !== true && (
-
                           <div
                             style={{
                               display: "flex",
@@ -824,6 +865,7 @@ function Dashboard() {
                               marginTop: "12px",
                             }}
                           >
+ archana-workspace
 
                             <Link
                               to={`/verify-ownership/${item.id}`}
@@ -831,9 +873,42 @@ function Dashboard() {
                               style={{ textDecoration: "none" }}
                             >
                               <ShieldCheck size={16} />
-                              Review Evidence
+                               Review Evidence
                             </Link>
 
+                            <button
+                              type="button"
+                              className="primary-button"
+                              disabled={
+                                actionLoading === item.id
+                              }
+                              onClick={() => 
+                                verifyClaim(item.id)
+                              }
+                            >
+                              <CheckCircle2 size={16} />
+
+                              {actionLoading === item.id
+                                ? "Processing..."
+                                : "Verify Claim"}
+                            </button>
+
+                            <button
+                              type="button"
+                              className="secondary-button"
+                              disabled={
+                                actionLoading === item.id
+                              }
+                              onClick={() => 
+                                rejectClaim(item.id)
+                              }
+                            >
+                              <XCircle size={16} />
+                               Reject
+                            </button>
+
+
+ main
                             <button
                               type="button"
                               className="primary-button"
@@ -864,20 +939,18 @@ function Dashboard() {
                               <XCircle size={16} />
                               Reject
                             </button>
-
                           </div>
-
                         )}
+
+                      {/* VERIFIED CLAIM */}
 
                       {item.claim_status === "verified" &&
                         item.returned !== true && (
-
                           <div
                             style={{
                               marginTop: "12px",
                             }}
                           >
-
                             <button
                               type="button"
                               className="secondary-button"
@@ -894,13 +967,12 @@ function Dashboard() {
                                 ? "Updating..."
                                 : "Mark as Returned"}
                             </button>
-
                           </div>
-
                         )}
 
-                      {item.returned === true && (
+                      {/* RETURNED */}
 
+                      {item.returned === true && (
                         <div
                           style={{
                             marginTop: "12px",
@@ -909,24 +981,21 @@ function Dashboard() {
                             gap: "8px",
                           }}
                         >
-
                           <CheckCircle2 size={18} />
 
                           <span>
                             Item returned successfully
                           </span>
-
                         </div>
-
                       )}
-
                     </div>
-
                   ))
-
               )}
-
             </div>
+
+            {/* ==================================================
+                REFRESH
+            ================================================== */}
 
             <div
               style={{
@@ -935,7 +1004,6 @@ function Dashboard() {
                 marginTop: "20px",
               }}
             >
-
               <button
                 type="button"
                 className="secondary-button"
@@ -944,13 +1012,9 @@ function Dashboard() {
                 <RotateCcw size={17} />
                 Refresh Dashboard
               </button>
-
             </div>
-
           </>
-
         )}
-
       </div>
     </div>
   );
