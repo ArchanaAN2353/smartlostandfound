@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
 
 import SmartMatchLoader from "../components/SmartMatchLoader";
@@ -37,7 +38,6 @@ function Home() {
 
   return (
     <div className="home-page">
-
       {/* Background decoration */}
       <div className="home-background">
         <div className="bg-shape bg-shape-purple" />
@@ -48,7 +48,6 @@ function Home() {
 
         {/* ================= HERO ================= */}
         <section className="hero-section">
-
           <div className="hero-content">
 
             <div className="hero-badge">
@@ -69,7 +68,6 @@ function Home() {
             </p>
 
             <div className="hero-actions">
-
               <Link
                 to="/report-lost"
                 className="primary-button"
@@ -86,11 +84,9 @@ function Home() {
                 <Package size={18} />
                 I Found Something
               </Link>
-
             </div>
 
             <div className="hero-trust">
-
               <div>
                 <ShieldCheck size={16} />
                 <span>Campus focused</span>
@@ -105,7 +101,6 @@ function Home() {
                 <CheckCircle2 size={16} />
                 <span>Simple recovery</span>
               </div>
-
             </div>
 
           </div>
@@ -116,7 +111,6 @@ function Home() {
             <div className="visual-card main-visual-card">
 
               <div className="visual-card-top">
-
                 <div className="visual-icon purple-bg">
                   <Sparkles size={22} />
                 </div>
@@ -124,7 +118,6 @@ function Home() {
                 <span className="status-badge">
                   SMARTMATCH
                 </span>
-
               </div>
 
               <h3>
@@ -137,7 +130,6 @@ function Home() {
               </p>
 
               <div className="match-preview">
-
                 <div className="match-icon">
                   <Package size={22} />
                 </div>
@@ -150,7 +142,6 @@ function Home() {
                 <div className="match-score">
                   92%
                 </div>
-
               </div>
 
               <Link
@@ -164,7 +155,6 @@ function Home() {
             </div>
 
             <div className="floating-info info-location">
-
               <div className="small-icon cyan-bg">
                 <MapPin size={15} />
               </div>
@@ -173,11 +163,9 @@ function Home() {
                 <strong>Location</strong>
                 <span>Campus tracked</span>
               </div>
-
             </div>
 
             <div className="floating-info info-time">
-
               <div className="small-icon pink-bg">
                 <Clock3 size={15} />
               </div>
@@ -186,20 +174,15 @@ function Home() {
                 <strong>Quick reports</strong>
                 <span>Save time</span>
               </div>
-
             </div>
 
           </div>
-
         </section>
 
-
         {/* ================= QUICK ACTIONS ================= */}
-
         <section className="quick-section">
 
           <div className="section-title">
-
             <span>GET STARTED</span>
 
             <h2>
@@ -209,25 +192,20 @@ function Home() {
             <p>
               Choose an option below to get started.
             </p>
-
           </div>
-
 
           <div className="quick-grid">
 
             {/* LOST */}
-
             <Link
               to="/report-lost"
               className="quick-card"
             >
-
               <div className="quick-icon purple-icon">
                 <Search size={25} />
               </div>
 
               <div className="quick-card-content">
-
                 <span className="quick-label">
                   LOST ITEM
                 </span>
@@ -245,25 +223,19 @@ function Home() {
                   Report Lost
                   <ArrowRight size={16} />
                 </div>
-
               </div>
-
             </Link>
 
-
             {/* FOUND */}
-
             <Link
               to="/report-found"
               className="quick-card"
             >
-
               <div className="quick-icon cyan-icon">
                 <Package size={25} />
               </div>
 
               <div className="quick-card-content">
-
                 <span className="quick-label">
                   FOUND ITEM
                 </span>
@@ -281,25 +253,19 @@ function Home() {
                   Report Found
                   <ArrowRight size={16} />
                 </div>
-
               </div>
-
             </Link>
 
-
             {/* SMARTMATCH */}
-
             <Link
               to="/matches"
               className="quick-card"
             >
-
               <div className="quick-icon pink-icon">
                 <Sparkles size={25} />
               </div>
 
               <div className="quick-card-content">
-
                 <span className="quick-label">
                   SMARTMATCH
                 </span>
@@ -317,25 +283,19 @@ function Home() {
                   View Matches
                   <ArrowRight size={16} />
                 </div>
-
               </div>
-
             </Link>
 
-
             {/* MYSTERY MATCH */}
-
             <Link
               to="/mystery-match"
               className="quick-card"
             >
-
               <div className="quick-icon purple-icon">
                 <Eye size={25} />
               </div>
 
               <div className="quick-card-content">
-
                 <span className="quick-label">
                   MYSTERY MATCH
                 </span>
@@ -353,25 +313,19 @@ function Home() {
                   Reveal Match
                   <ArrowRight size={16} />
                 </div>
-
               </div>
-
             </Link>
 
-
             {/* COMMUNITY SEARCH */}
-
             <Link
               to="/community"
               className="quick-card"
             >
-
               <div className="quick-icon cyan-icon">
                 <Users size={25} />
               </div>
 
               <div className="quick-card-content">
-
                 <span className="quick-label">
                   COMMUNITY SEARCH
                 </span>
@@ -390,22 +344,16 @@ function Home() {
                   Join the Search
                   <ArrowRight size={16} />
                 </div>
-
               </div>
-
             </Link>
 
           </div>
-
         </section>
 
-
         {/* ================= HOW IT WORKS ================= */}
-
         <section className="how-section">
 
           <div className="section-title centered">
-
             <span>
               HOW IT WORKS
             </span>
@@ -420,14 +368,11 @@ function Home() {
               No complicated process. Just report,
               match and recover.
             </p>
-
           </div>
-
 
           <div className="steps-grid">
 
             <div className="step-item">
-
               <div className="step-number">
                 01
               </div>
@@ -444,15 +389,11 @@ function Home() {
                 Submit information about the item
                 you lost or found.
               </p>
-
             </div>
-
 
             <div className="step-connector" />
 
-
             <div className="step-item">
-
               <div className="step-number">
                 02
               </div>
@@ -469,15 +410,11 @@ function Home() {
                 Compare reports using AI fingerprints,
                 item details, locations and timing.
               </p>
-
             </div>
-
 
             <div className="step-connector" />
 
-
             <div className="step-item">
-
               <div className="step-number">
                 03
               </div>
@@ -494,16 +431,12 @@ function Home() {
                 Review the match and start the
                 recovery process.
               </p>
-
             </div>
 
           </div>
-
         </section>
 
-
         {/* ================= MYSTERY MATCH CTA ================= */}
-
         <section
           style={{
             marginTop: "60px",
@@ -518,9 +451,7 @@ function Home() {
             flexWrap: "wrap",
           }}
         >
-
           <div>
-
             <span
               style={{
                 fontSize: "12px",
@@ -552,9 +483,7 @@ function Home() {
               the strongest lost and found reports, then
               reveal the AI-generated match.
             </p>
-
           </div>
-
 
           <Link
             to="/mystery-match"
@@ -575,12 +504,9 @@ function Home() {
             Try Mystery Match
             <ArrowRight size={17} />
           </Link>
-
         </section>
 
-
         {/* ================= DASHBOARD CTA ================= */}
-
         <section className="dashboard-banner">
 
           <div className="dashboard-banner-icon">
@@ -588,7 +514,6 @@ function Home() {
           </div>
 
           <div className="dashboard-banner-content">
-
             <span>
               CAMPUS OVERVIEW
             </span>
@@ -602,7 +527,6 @@ function Home() {
               matches and claimed items from your
               dashboard.
             </p>
-
           </div>
 
           <Link
@@ -615,9 +539,7 @@ function Home() {
 
         </section>
 
-
         {/* ================= FOOTER ================= */}
-
         <footer className="home-footer">
 
           <div className="footer-brand">
@@ -627,27 +549,24 @@ function Home() {
             </div>
 
             <div>
-
               <strong>
-                Smart Lost &amp; Found
+                404-Founders
               </strong>
 
               <span>
-                AI-powered campus recovery
+                Smart Lost &amp; Found
               </span>
-
             </div>
 
           </div>
 
           <span className="footer-right">
-            Built for smarter campuses.
+            Developed by the 404-Founders team · 2026
           </span>
 
         </footer>
 
       </main>
-
     </div>
   );
 }
