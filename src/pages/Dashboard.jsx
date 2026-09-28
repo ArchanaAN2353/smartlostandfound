@@ -825,6 +825,15 @@ function Dashboard() {
                             }}
                           >
 
+                            <Link
+                              to={`/verify-ownership/${item.id}`}
+                              className="secondary-button"
+                              style={{ textDecoration: "none" }}
+                            >
+                              <ShieldCheck size={16} />
+                              Review Evidence
+                            </Link>
+
                             <button
                               type="button"
                               className="primary-button"

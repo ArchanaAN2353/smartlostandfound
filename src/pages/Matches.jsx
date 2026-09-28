@@ -690,6 +690,17 @@ function MatchCard({ match }) {
           Contact Person
         </Link>
 
+        {match.viewerRole === "lost-owner" && (
+          <Link
+            to={`/claim/${match.found.id}?lost=${match.lost.id}`}
+            className="matches-contact-button"
+            style={{ marginLeft: "10px" }}
+          >
+            <ShieldCheck size={17} />
+            Claim This Item
+          </Link>
+        )}
+
       </div>
 
     </article>

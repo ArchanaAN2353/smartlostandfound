@@ -15,6 +15,9 @@ import MysteryMatch from "./pages/MysteryMatch";
 import CommunitySearch from "./pages/CommunitySearch";
 import ContactAgent from "./pages/ContactAgent";
 import Chat from "./pages/Chat";
+import ComplaintBox from "./pages/ComplaintBox";
+import ClaimItem from "./pages/ClaimItem";
+import VerifyOwnership from "./pages/VerifyOwnership";
 
 // ======================================================
 // AUTH CHECK
@@ -228,6 +231,45 @@ function App() {
           element={
             <ProtectedRoute>
               <Chat />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ==============================================
+            COMPLAINT BOX
+        ============================================== */}
+
+        <Route
+          path="/complaints"
+          element={
+            <ProtectedRoute>
+              <ComplaintBox />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ==============================================
+            CLAIM ITEM (OWNERSHIP VERIFICATION)
+        ============================================== */}
+
+        <Route
+          path="/claim/:foundItemId"
+          element={
+            <ProtectedRoute>
+              <ClaimItem />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ==============================================
+            VERIFY OWNERSHIP (FOUNDER REVIEW)
+        ============================================== */}
+
+        <Route
+          path="/verify-ownership/:foundItemId"
+          element={
+            <ProtectedRoute>
+              <VerifyOwnership />
             </ProtectedRoute>
           }
         />
