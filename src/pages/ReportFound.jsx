@@ -7,6 +7,7 @@ import {
   Upload,
   Package,
   Brain,
+  ShieldCheck,
 } from "lucide-react";
 
 import { supabase } from "../services/supabase";
@@ -22,6 +23,40 @@ function ReportFound() {
     foundTime: "",
     characteristics: "",
   });
+
+  /*
+   * OWNERSHIP VERIFICATION (MANDATORY)
+   *
+   * verificationCount decides how many question/answer blocks are
+   * rendered. verificationQA always stays in sync with that count.
+   */
+  const [verificationCount, setVerificationCount] = useState(1);
+  const [verificationQA, setVerificationQA] = useState([
+    { question: "", answer: "" },
+  ]);
+
+  function handleVerificationCountChange(e) {
+    const count = Number(e.target.value);
+    setVerificationCount(count);
+
+    setVerificationQA((previous) => {
+      const next = [...previous];
+
+      while (next.length < count) {
+        next.push({ question: "", answer: "" });
+      }
+
+      return next.slice(0, count);
+    });
+  }
+
+  function handleVerificationFieldChange(index, field, value) {
+    setVerificationQA((previous) =>
+      previous.map((qa, i) =>
+        i === index ? { ...qa, [field]: value } : qa
+      )
+    );
+  }
 
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -39,6 +74,22 @@ function ReportFound() {
 
     if (!image) {
       alert("Please upload an item photo.");
+      return;
+    }
+
+    /*
+     * OWNERSHIP VERIFICATION IS MANDATORY
+     * Every question and every answer must be filled in before
+     * the report can be submitted.
+     */
+    const incompleteVerification = verificationQA.some(
+      (qa) => !qa.question.trim() || !qa.answer.trim()
+    );
+
+    if (incompleteVerification) {
+      alert(
+        "Please fill in every verification question and its answer before submitting."
+      );
       return;
     }
 
@@ -145,6 +196,22 @@ function ReportFound() {
         image_fingerprint: imageFingerprint,
         status: "found",
         claim_status: "available",
+
+        /*
+         * OWNERSHIP VERIFICATION (mandatory)
+         *
+         * verification_questions: array of question strings — safe
+         * to show to anyone trying to claim the item.
+         * verification_answers: array of answer strings, in the
+         * SAME order — must stay private to the founder. Never
+         * select this column on any claimant-facing screen.
+         */
+        verification_questions: verificationQA.map((qa) =>
+          qa.question.trim()
+        ),
+        verification_answers: verificationQA.map((qa) =>
+          qa.answer.trim()
+        ),
       };
 
       console.log(
@@ -200,6 +267,9 @@ function ReportFound() {
         foundTime: "",
         characteristics: "",
       });
+
+      setVerificationCount(1);
+      setVerificationQA([{ question: "", answer: "" }]);
 
       setImage(null);
 
@@ -447,6 +517,115 @@ function ReportFound() {
               onChange={handleChange}
             />
 
+          </div>
+
+          {/* OWNERSHIP VERIFICATION (MANDATORY) */}
+
+          <div
+            className="form-group"
+            style={{
+              padding: "16px",
+              borderRadius: "12px",
+              border: "1px dashed rgba(91, 76, 58, 0.3)",
+            }}
+          >
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <ShieldCheck size={16} />
+              Set verification questions (required)
+            </label>
+
+            <p
+              style={{
+                fontSize: "12px",
+                color: "#71685b",
+                margin: "4px 0 16px",
+                lineHeight: 1.5,
+              }}
+            >
+              Ask something only the real owner would know — e.g.
+              "What's the lock screen wallpaper?" or "How many keys
+              are on the keychain?". Whoever claims this item must
+              answer every question correctly before you verify
+              them.
+            </p>
+
+            <div style={{ marginBottom: "18px" }}>
+              <label style={{ marginBottom: "6px" }}>
+                How many questions do you want to add?
+              </label>
+
+              <select
+                value={verificationCount}
+                onChange={handleVerificationCountChange}
+              >
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <option key={n} value={n}>
+                    {n} question{n > 1 ? "s" : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {verificationQA.map((qa, index) => (
+              <div
+                key={index}
+                style={{
+                  marginBottom:
+                    index === verificationQA.length - 1 ? 0 : "16px",
+                  paddingBottom:
+                    index === verificationQA.length - 1 ? 0 : "16px",
+                  borderBottom:
+                    index === verificationQA.length - 1
+                      ? "none"
+                      : "1px solid rgba(91, 76, 58, 0.15)",
+                }}
+              >
+                <label
+                  style={{
+                    fontSize: "11px",
+                    marginBottom: "6px",
+                    color: "#8b4d32",
+                  }}
+                >
+                  QUESTION {index + 1}
+                </label>
+
+                <input
+                  type="text"
+                  placeholder="e.g. What sticker is on the laptop lid?"
+                  value={qa.question}
+                  onChange={(e) =>
+                    handleVerificationFieldChange(
+                      index,
+                      "question",
+                      e.target.value
+                    )
+                  }
+                  required
+                  style={{ marginBottom: "10px" }}
+                />
+
+                <input
+                  type="text"
+                  placeholder="The correct answer (only you will see this)"
+                  value={qa.answer}
+                  onChange={(e) =>
+                    handleVerificationFieldChange(
+                      index,
+                      "answer",
+                      e.target.value
+                    )
+                  }
+                  required
+                />
+              </div>
+            ))}
           </div>
 
           {/* AI STATUS */}
