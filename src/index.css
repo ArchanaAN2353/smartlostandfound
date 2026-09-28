@@ -3674,3 +3674,359 @@ select:focus {
     transform: rotate(360deg);
   }
 }
+/* =========================================================
+   30. DARK / LIGHT THEME
+   ========================================================= */
+
+/* Smooth theme transitions */
+
+html,
+body,
+body *,
+button,
+input,
+textarea,
+select {
+  transition:
+    background-color 350ms ease,
+    color 350ms ease,
+    border-color 350ms ease,
+    box-shadow 350ms ease;
+}
+
+
+/* =========================================================
+   LIGHT THEME
+   ========================================================= */
+
+:root,
+:root.light {
+
+  --paper: #f3eee0;
+  --paper-deep: #e9e0c8;
+
+  --surface: #fffcf5;
+  --surface-alt: #fbf5e7;
+
+  --ink: #221e17;
+  --ink-soft: #5c5544;
+  --ink-muted: #8c8368;
+  --ink-faint: #b3a988;
+
+  --line: #d8ccab;
+  --line-strong: #c2b48c;
+
+  --shadow-pop:
+    0 18px 40px rgba(34, 30, 23, 0.16);
+}
+
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+:root.dark {
+
+  --paper: #0b0d12;
+  --paper-deep: #11141b;
+
+  --surface: #151922;
+  --surface-alt: #1b202b;
+
+  --ink: #f4f1e8;
+  --ink-soft: #c8c4b9;
+  --ink-muted: #969286;
+  --ink-faint: #68665f;
+
+  --line: #303642;
+  --line-strong: #444b5a;
+
+  --rust: #d96a4b;
+  --rust-soft: rgba(217, 106, 75, 0.14);
+  --rust-line: rgba(217, 106, 75, 0.35);
+
+  --moss: #79a56d;
+  --moss-soft: rgba(121, 165, 109, 0.14);
+  --moss-line: rgba(121, 165, 109, 0.35);
+
+  --brass: #d2a94c;
+  --brass-dark: #b88d31;
+  --brass-soft: rgba(210, 169, 76, 0.14);
+  --brass-line: rgba(210, 169, 76, 0.35);
+
+  --ledger: #72a8c8;
+  --ledger-soft: rgba(114, 168, 200, 0.13);
+  --ledger-line: rgba(114, 168, 200, 0.35);
+
+  --alert: #e06455;
+  --alert-soft: rgba(224, 100, 85, 0.13);
+
+  --shadow-card:
+    3px 3px 0 #11141b,
+    3px 3px 0 1px var(--line);
+
+  --shadow-lift:
+    5px 6px 0 #11141b,
+    5px 6px 0 1px var(--line-strong);
+
+  --shadow-pop:
+    0 18px 45px rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   DARK BACKGROUND
+   ========================================================= */
+
+html.dark body {
+
+  background-color: var(--paper);
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1.3px
+    );
+
+  background-size: 15px 15px;
+}
+
+
+/* =========================================================
+   THEME TOGGLE
+   ========================================================= */
+
+.theme-toggle {
+
+  position: fixed;
+
+  top: 20px;
+  right: 20px;
+
+  width: 72px;
+  height: 36px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 999px;
+
+  background: var(--surface);
+
+  color: var(--ink);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 4px;
+
+  z-index: 99999;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.12);
+
+  cursor: pointer;
+
+  overflow: hidden;
+}
+
+
+/* Icons */
+
+.theme-icon {
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0.5;
+
+  z-index: 1;
+
+  transition:
+    opacity 250ms ease,
+    transform 250ms ease;
+}
+
+.theme-icon-sun {
+  color: #a07627;
+}
+
+.theme-icon-moon {
+  color: #7186c7;
+}
+
+
+/* Sliding circle */
+
+.theme-toggle-thumb {
+
+  position: absolute;
+
+  top: 4px;
+  left: 4px;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--ink);
+
+  color: var(--surface);
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.25);
+
+  transition:
+    transform 350ms cubic-bezier(0.68, -0.25, 0.265, 1.25),
+    background-color 350ms ease,
+    color 350ms ease;
+}
+
+
+/* Move toggle thumb in dark mode */
+
+html.dark .theme-toggle-thumb {
+
+  transform: translateX(36px);
+
+}
+
+
+/* Active icons */
+
+html.light .theme-icon-sun,
+:root:not(.dark) .theme-icon-sun {
+
+  opacity: 1;
+
+  transform: rotate(0deg) scale(1.05);
+
+}
+
+html.dark .theme-icon-moon {
+
+  opacity: 1;
+
+  transform: rotate(0deg) scale(1.05);
+
+}
+
+
+/* =========================================================
+   THEME REVEAL ANIMATION
+   ========================================================= */
+
+html.theme-transition::before {
+
+  content: "";
+
+  position: fixed;
+
+  z-index: 99998;
+
+  pointer-events: none;
+
+  left: var(--theme-x, 50%);
+  top: var(--theme-y, 50%);
+
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%) scale(0);
+
+  background: var(--paper);
+
+  animation:
+    themeReveal 650ms cubic-bezier(0.4, 0, 0.2, 1)
+    forwards;
+
+}
+
+
+/* Reveal */
+
+@keyframes themeReveal {
+
+  0% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+
+    opacity: 1;
+
+  }
+
+  100% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(180);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+/* =========================================================
+   EXTRA DARK MODE POLISH
+   ========================================================= */
+
+html.dark img {
+
+  filter: brightness(0.92) contrast(1.03);
+
+}
+
+html.dark .theme-toggle {
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.35);
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .theme-toggle {
+
+    top: 14px;
+    right: 14px;
+
+    width: 66px;
+    height: 34px;
+
+  }
+
+  .theme-toggle-thumb {
+
+    width: 26px;
+    height: 26px;
+
+  }
+
+  html.dark .theme-toggle-thumb {
+
+    transform: translateX(32px);
+
+  }
+
+}
