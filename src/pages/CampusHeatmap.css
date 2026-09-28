@@ -1,0 +1,894 @@
+/* =====================================================
+   CAMPUS HEATMAP
+===================================================== */
+
+.campus-heatmap-page {
+  min-height: 100vh;
+  padding: 35px 20px 70px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.campus-heatmap-container {
+  width: min(1250px, 100%);
+  margin: auto;
+}
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+.heatmap-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--ink-soft);
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  margin-bottom: 25px;
+}
+
+.heatmap-back:hover {
+  color: var(--brass-dark);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.heatmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 25px;
+
+  margin-bottom: 25px;
+}
+
+.heatmap-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.heatmap-title-icon {
+  width: 58px;
+  height: 58px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--ink);
+  color: var(--surface);
+
+  border-radius: var(--radius);
+
+  box-shadow:
+    5px 5px 0 var(--line-strong);
+}
+
+.heatmap-label {
+  font-family: var(--font-tag);
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: .05em;
+
+  color: var(--brass-dark);
+
+  margin-bottom: 5px;
+}
+
+.heatmap-header h1 {
+  font-size: clamp(32px, 5vw, 50px);
+  line-height: 1;
+
+  margin: 0 0 9px;
+}
+
+.heatmap-header p {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+
+/* =====================================================
+   REFRESH
+===================================================== */
+
+.heatmap-refresh-button {
+  min-height: 43px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 15px;
+
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+
+  background: var(--surface);
+  color: var(--ink);
+
+  font-weight: 700;
+
+  box-shadow:
+    3px 3px 0 var(--line-strong);
+
+  cursor: pointer;
+}
+
+.heatmap-refresh-button:hover {
+  transform: translate(-1px, -1px);
+}
+
+.refresh-spin {
+  animation:
+    heatmap-spin .8s linear infinite;
+}
+
+@keyframes heatmap-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.heatmap-error {
+  padding: 14px 16px;
+
+  margin-bottom: 18px;
+
+  color: var(--alert);
+
+  background: var(--alert-soft);
+
+  border: 1px solid rgba(156,47,34,.3);
+
+  border-radius: var(--radius);
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.heatmap-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 13px;
+
+  margin-bottom: 18px;
+}
+
+.heatmap-stat {
+  padding: 18px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--ink);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow:
+    var(--shadow-card);
+}
+
+.heatmap-stat span {
+  display: block;
+
+  color: var(--ink-muted);
+
+  font-size: 10px;
+  font-family: var(--font-tag);
+}
+
+.heatmap-stat strong {
+  display: block;
+
+  margin-top: 7px;
+
+  font-size: 24px;
+}
+
+.heatmap-stat .hot-zone-name {
+  font-size: 16px;
+}
+
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+.heatmap-controls {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 18px;
+}
+
+.heatmap-controls select {
+  height: 44px;
+
+  padding: 0 13px;
+
+  border:
+    1px solid var(--line-strong);
+
+  border-radius: var(--radius);
+
+  background: var(--surface);
+
+  color: var(--ink);
+
+  outline: none;
+}
+
+.heatmap-search {
+  width: 320px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 12px;
+
+  background: var(--surface);
+
+  border:
+    1px solid var(--line-strong);
+
+  border-radius: var(--radius);
+}
+
+.heatmap-search input {
+  width: 100%;
+
+  height: 42px;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: var(--ink);
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.heatmap-main {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(300px, .75fr);
+
+  gap: 18px;
+}
+
+
+/* =====================================================
+   MAP CARD
+===================================================== */
+
+.campus-map-card,
+.hotzone-card,
+.selected-zone-card {
+  background: var(--surface);
+
+  border:
+    1px solid var(--ink);
+
+  border-radius:
+    var(--radius-lg);
+
+  box-shadow:
+    var(--shadow-card);
+}
+
+.campus-map-card {
+  padding: 20px;
+}
+
+.map-card-header,
+.hotzone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 16px;
+}
+
+.map-card-header h2,
+.hotzone-header h2,
+.selected-zone-card h2 {
+  margin: 0;
+
+  font-size: 23px;
+}
+
+.map-card-header > span {
+  padding: 6px 9px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 99px;
+
+  font-family: var(--font-tag);
+  font-size: 9px;
+
+  color: var(--ink-muted);
+}
+
+
+/* =====================================================
+   REAL MAP
+===================================================== */
+
+.real-campus-map {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  border:
+    1px solid var(--line-strong);
+
+  border-radius:
+    var(--radius);
+
+  background: #eeeeee;
+}
+
+.campus-map-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+}
+
+
+/* =====================================================
+   HOTSPOTS
+===================================================== */
+
+.map-hotspot {
+  position: absolute;
+
+  width: 0;
+  height: 0;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  transform:
+    translate(-50%, -50%);
+
+  cursor: pointer;
+
+  z-index: 10;
+}
+
+.hotspot-glow {
+  position: absolute;
+
+  width: var(--hot-size);
+  height: var(--hot-size);
+
+  left:
+    calc(var(--hot-size) / -2);
+
+  top:
+    calc(var(--hot-size) / -2);
+
+  border-radius: 50%;
+
+  opacity: .35;
+
+  animation:
+    hotspot-pulse 2s
+    ease-in-out infinite;
+}
+
+.hotspot-core {
+  position: absolute;
+
+  left: -19px;
+  top: -19px;
+
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  border:
+    3px solid white;
+
+  color: white;
+
+  font-family: var(--font-tag);
+
+  font-size: 11px;
+  font-weight: 800;
+
+  box-shadow:
+    0 4px 12px
+    rgba(0,0,0,.25);
+}
+
+.hotspot-name {
+  position: absolute;
+
+  top: 25px;
+  left: 24px;
+
+  white-space: nowrap;
+
+  padding: 5px 7px;
+
+  background:
+    rgba(255,252,245,.95);
+
+  border:
+    1px solid var(--line-strong);
+
+  border-radius: 4px;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  color: var(--ink);
+
+  box-shadow:
+    2px 2px 0
+    rgba(0,0,0,.12);
+}
+
+
+/* =====================================================
+   HEAT COLORS
+===================================================== */
+
+.hotspot-low .hotspot-glow,
+.hotspot-low .hotspot-core {
+  background: var(--moss);
+}
+
+.hotspot-medium .hotspot-glow,
+.hotspot-medium .hotspot-core {
+  background: var(--brass);
+}
+
+.hotspot-high .hotspot-glow,
+.hotspot-high .hotspot-core {
+  background: var(--rust);
+}
+
+.hotspot-critical .hotspot-glow,
+.hotspot-critical .hotspot-core {
+  background: var(--alert);
+}
+
+
+@keyframes hotspot-pulse {
+
+  0%,
+  100% {
+    transform: scale(.8);
+    opacity: .2;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: .38;
+  }
+
+}
+
+
+/* =====================================================
+   NORTH
+===================================================== */
+
+.map-north {
+  position: absolute;
+
+  top: 10px;
+  right: 10px;
+
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  background: white;
+
+  border:
+    1px solid var(--ink);
+
+  border-radius: 50%;
+
+  font-family: var(--font-tag);
+  font-size: 10px;
+  font-weight: 700;
+
+  z-index: 20;
+}
+
+
+/* =====================================================
+   LEGEND
+===================================================== */
+
+.heatmap-legend {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 15px;
+
+  margin-top: 13px;
+
+  font-size: 11px;
+}
+
+.heatmap-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.heatmap-legend i {
+  width: 9px;
+  height: 9px;
+
+  display: inline-block;
+
+  border-radius: 50%;
+}
+
+.legend-low {
+  background: var(--moss);
+}
+
+.legend-medium {
+  background: var(--brass);
+}
+
+.legend-high {
+  background: var(--rust);
+}
+
+.legend-critical {
+  background: var(--alert);
+}
+
+
+/* =====================================================
+   HOT ZONES
+===================================================== */
+
+.hotzone-card {
+  padding: 20px;
+}
+
+.hotzone-header svg {
+  color: var(--brass-dark);
+}
+
+.zone-ranking {
+  display: flex;
+  flex-direction: column;
+}
+
+.zone-ranking-row {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    34px 1fr;
+
+  gap: 10px;
+
+  padding: 12px 0;
+
+  border: 0;
+
+  border-bottom:
+    1px solid var(--line);
+
+  background: transparent;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  color: var(--ink);
+}
+
+.zone-ranking-row:hover {
+  transform: translateX(2px);
+}
+
+.zone-number {
+  color: var(--ink-muted);
+
+  font-family: var(--font-tag);
+
+  font-size: 10px;
+}
+
+.zone-name {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 12px;
+}
+
+.zone-name b {
+  color: var(--rust);
+
+  font-family: var(--font-tag);
+}
+
+.zone-progress {
+  height: 7px;
+
+  margin-top: 7px;
+
+  overflow: hidden;
+
+  background:
+    var(--paper-deep);
+
+  border-radius: 99px;
+}
+
+.zone-progress span {
+  display: block;
+
+  height: 100%;
+
+  background:
+    var(--brass-dark);
+
+  border-radius: inherit;
+}
+
+
+/* =====================================================
+   TIP
+===================================================== */
+
+.heatmap-tip {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 18px;
+
+  padding: 13px;
+
+  background:
+    var(--brass-soft);
+
+  border:
+    1px solid var(--brass-line);
+
+  border-radius:
+    var(--radius);
+}
+
+.heatmap-tip svg {
+  flex: 0 0 auto;
+
+  color:
+    var(--brass-dark);
+}
+
+.heatmap-tip strong {
+  font-size: 11px;
+}
+
+.heatmap-tip p {
+  margin-top: 4px;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   SELECTED ZONE
+===================================================== */
+
+.selected-zone-card {
+  margin-top: 18px;
+
+  padding: 20px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 25px;
+}
+
+.selected-zone-card p {
+  margin-top: 5px;
+
+  color: var(--ink-muted);
+
+  font-size: 12px;
+}
+
+.selected-zone-items {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: flex-end;
+
+  gap: 8px;
+}
+
+.selected-item {
+  min-width: 130px;
+
+  padding: 10px;
+
+  background:
+    var(--surface-alt);
+
+  border:
+    1px solid var(--line);
+
+  border-radius:
+    var(--radius);
+}
+
+.selected-item strong {
+  display: block;
+
+  font-size: 11px;
+}
+
+.selected-item span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--ink-muted);
+
+  font-size: 9px;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.heatmap-loading,
+.no-hotzones {
+  min-height: 150px;
+
+  display: grid;
+
+  place-items: center;
+
+  align-content: center;
+
+  gap: 8px;
+
+  color: var(--ink-muted);
+
+  text-align: center;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 950px) {
+
+  .heatmap-stats {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .heatmap-main {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .heatmap-page {
+    padding: 25px 12px 50px;
+  }
+
+  .heatmap-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .heatmap-controls {
+    flex-direction: column;
+  }
+
+  .heatmap-search {
+    width: 100%;
+  }
+
+  .selected-zone-card {
+    flex-direction: column;
+  }
+
+  .selected-zone-items {
+    justify-content: flex-start;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .heatmap-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .heatmap-heading {
+    align-items: flex-start;
+  }
+
+  .heatmap-title-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .hotspot-name {
+    font-size: 8px;
+  }
+
+}
